@@ -1,0 +1,7 @@
+.liStyle {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    gap: 20px;
+}

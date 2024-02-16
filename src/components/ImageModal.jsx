@@ -1,20 +1,22 @@
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import css from './imageModal.module.css';
 
-const ImageModal = ({ isOpen, onRequestClose, image }) => {
+const ImageModal = ({ isOpen, onRequestClose, src, alt, author, likes }) => {
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel="Image Modal"
       overlayClassName="modal-overlay"
+      className={css.modalOverlay}
     >
-      {image && (
-        <div>
-          <img src={image.urls.regular} alt={image.alt_description} />
+      {src && alt && (
+        <div className={css.modalContent}>
+          <img src={src} alt={alt} />
           <div>
-            <p>Author: {image.user.username}</p>
-            <p>Likes: {image.likes}</p>
+            <p>Author: {author}</p>
+            <p>Likes: {likes}</p>
           </div>
         </div>
       )}
@@ -25,17 +27,10 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
 ImageModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
-  image: PropTypes.shape({
-    urls: PropTypes.shape({
-      regular: PropTypes.string.isRequired,
-    }).isRequired,
-    alt_description: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      username: PropTypes.string.isRequired,
-    }).isRequired,
-    likes: PropTypes.number.isRequired,
-  }),
+  src: PropTypes.string,
+  alt: PropTypes.string,
+  author: PropTypes.string,
+  likes: PropTypes.number,
 };
 
 export default ImageModal;
-

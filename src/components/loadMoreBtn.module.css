@@ -1,0 +1,10 @@
+.button {
+    margin: 0 auto;
+    display: block;
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #fff; /* білий колір фону для контрасту */
+    color: #007bff; /* синій колір тексту */
+    border: solid black 2px;
+    cursor: pointer;
+  }
