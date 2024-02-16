@@ -85,7 +85,9 @@ const handleSearch = async (query) => {
       {error && <ErrorMessage message={error} />}
       {images.length > 0 && <LoadMoreBtn onLoadMore={handleLoadMore} />}
       <Toaster />
-      {modalIsOpen && <ImageModal image={selectedImage} onClose={handleModalClose} />}
+      {modalIsOpen && (
+        <ImageModal isOpen={modalIsOpen} onRequestClose={handleModalClose} image={selectedImage} />
+      )}
     </div>
   );
 };
