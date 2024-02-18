@@ -1,6 +1,8 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import css from './imageModal.module.css';
+
+Modal.setAppElement('#root');
 
 const ImageModal = ({ isOpen, onRequestClose, src, alt, author, likes }) => {
   return (
@@ -13,7 +15,7 @@ const ImageModal = ({ isOpen, onRequestClose, src, alt, author, likes }) => {
     >
       {src && alt && (
         <div className={css.modalContent}>
-          <img src={src} alt={alt} />
+          <img className={css.image} src={src} alt={alt} />
           <div>
             <p>Author: {author}</p>
             <p>Likes: {likes}</p>
@@ -24,13 +26,13 @@ const ImageModal = ({ isOpen, onRequestClose, src, alt, author, likes }) => {
   );
 };
 
-ImageModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
-  src: PropTypes.string,
-  alt: PropTypes.string,
-  author: PropTypes.string,
-  likes: PropTypes.number,
-};
+// ImageModal.propTypes = {
+//   isOpen: PropTypes.bool.isRequired,
+//   onRequestClose: PropTypes.func.isRequired,
+//   src: PropTypes.string,
+//   alt: PropTypes.string,
+//   author: PropTypes.string,
+//   likes: PropTypes.number,
+// };
 
 export default ImageModal;

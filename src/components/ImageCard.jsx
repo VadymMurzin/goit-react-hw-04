@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const ImageCard = ({ imageUrl, alt }) => {
   if (typeof imageUrl === 'object' && imageUrl.urls && imageUrl.urls.small) {
@@ -14,17 +14,17 @@ const ImageCard = ({ imageUrl, alt }) => {
   );
 };
 
-ImageCard.propTypes = {
-  imageUrl: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      urls: PropTypes.shape({
-        small: PropTypes.string.isRequired,
-      }).isRequired,
-    }),
-  ]).isRequired,
-  alt: PropTypes.string,
-};
+// ImageCard.propTypes = {
+//   imageUrl: PropTypes.oneOfType([
+//     PropTypes.string,
+//     PropTypes.shape({
+//       urls: PropTypes.shape({
+//         small: PropTypes.string.isRequired,
+//       }).isRequired,
+//     }),
+//   ]).isRequired,
+//   alt: PropTypes.string,
+// };
 
 export default ImageCard;
 
