@@ -134,7 +134,7 @@ const App = () => {
         setError(false);
         setLoading(true);
         const response = await axios.get(
-          `https://api.unsplash.com/search/photos?query=${query}&page=${page}&per_page=${20}&client_id=${accessKey}`
+          `https://api.unsplash.com/search/photos?query=${query.split('/')[1]}&page=${page}&per_page=${20}&client_id=${accessKey}`
         );
         // setImages(response.data.results);
         // setPage(2);
@@ -151,7 +151,7 @@ const App = () => {
   }, [query, page]);
 
   const handleSearch = async newQuery => {
-    setQuery(newQuery);
+    setQuery(`${Date.now()}/${newQuery}`);
     setPage(1);
     setImages([]);
     setLoading(false);
