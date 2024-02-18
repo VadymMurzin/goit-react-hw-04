@@ -104,7 +104,8 @@
 
 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import {fetchImage} from '../api';
 import SearchBar from './SearchBar';
 import ImageGallery from './ImageGallery';
 import LoadMoreBtn from './LoadMoreBtn';
@@ -122,7 +123,7 @@ const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [query, setQuery] = useState('');
 
-  const accessKey = 'U8xAAUR5Fxct90hrHZPN8X0OTN8GSELW7D9-rpK04bA';
+  // const accessKey = 'U8xAAUR5Fxct90hrHZPN8X0OTN8GSELW7D9-rpK04bA';
 
   useEffect(() => {
     if (query === '') {
@@ -133,12 +134,12 @@ const App = () => {
       try {
         setError(false);
         setLoading(true);
-        const response = await axios.get(
-          `https://api.unsplash.com/search/photos?query=${query.split('/')[1]}&page=${page}&per_page=${20}&client_id=${accessKey}`
-        );
-        // setImages(response.data.results);
-        // setPage(2);
-        setImages(prevImages => [...prevImages, ...response.data.results]);
+        const fetchedData = await fetchImage(query.split('/')[1], page);
+        // const response = await axios.get(
+        //   `https://api.unsplash.com/search/photos?query=${query.split('/')[1]}&page=${page}&per_page=${20}&client_id=${accessKey}`
+        // );
+        // setImages(prevImages => [...prevImages, ...response.data.results]);
+        setImages(prevImages => [...prevImages, ...fetchedData]);
       } catch (error) {
         console.error('Error fetching images:', error);
         setError('Failed to load images. Please try again later.');
