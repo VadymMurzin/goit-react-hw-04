@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import axios from 'axios';
 import {fetchImage} from '../api';
 import SearchBar from './SearchBar';
 import ImageGallery from './ImageGallery';
@@ -18,7 +17,10 @@ const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [query, setQuery] = useState('');
 
-  // const accessKey = 'U8xAAUR5Fxct90hrHZPN8X0OTN8GSELW7D9-rpK04bA';
+  const [results, setResults] = useState([]);
+
+  
+
 
   useEffect(() => {
     if (query === '') {
@@ -30,11 +32,11 @@ const App = () => {
         setError(false);
         setLoading(true);
         const fetchedData = await fetchImage(query.split('/')[1], page);
-        // const response = await axios.get(
-        //   `https://api.unsplash.com/search/photos?query=${query.split('/')[1]}&page=${page}&per_page=${20}&client_id=${accessKey}`
-        // );
-        // setImages(prevImages => [...prevImages, ...response.data.results]);
         setImages(prevImages => [...prevImages, ...fetchedData]);
+
+        setResults(fetchedData);
+
+
       } catch (error) {
         console.error('Error fetching images:', error);
         setError('Failed to load images. Please try again later.');
@@ -56,6 +58,7 @@ const App = () => {
 
   const handleLoadMore = () => {
     setPage(page + 1);
+    
   };
 
   const handleImageClick = image => {
@@ -90,7 +93,10 @@ const App = () => {
       <ImageGallery images={images} onImageClick={handleImageClick} />
       {loading && <Loader />}
       {error && <ErrorMessage message={error} />}
-      {images.length > 0 && <LoadMoreBtn onLoadMore={handleLoadMore} />}
+      {/* {images.length > 0 && (<LoadMoreBtn onLoadMore={handleLoadMore} />)} */}
+
+      {images.length > 0 && results.length - 1 > 0 &&  <LoadMoreBtn onLoadMore={handleLoadMore} />}
+
       <Toaster />
       {modalIsOpen && (
         <ImageModal

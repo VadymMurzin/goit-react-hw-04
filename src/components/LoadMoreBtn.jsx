@@ -5,4 +5,3 @@ const LoadMoreBtn = ({ onLoadMore }) => {
 };
 
 export default LoadMoreBtn;
-
