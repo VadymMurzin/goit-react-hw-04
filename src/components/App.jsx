@@ -17,7 +17,7 @@ const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [query, setQuery] = useState('');
 
-  const [results, setResults] = useState([]);
+  const [total, setTotal] = useState([]);
 
   
 
@@ -32,9 +32,9 @@ const App = () => {
         setError(false);
         setLoading(true);
         const fetchedData = await fetchImage(query.split('/')[1], page);
-        setImages(prevImages => [...prevImages, ...fetchedData]);
+        setImages(prevImages => [...prevImages, ...fetchedData.results]);
 
-        setResults(fetchedData);
+        setTotal(fetchedData.total);
 
 
       } catch (error) {
@@ -95,7 +95,9 @@ const App = () => {
       {error && <ErrorMessage message={error} />}
       {/* {images.length > 0 && (<LoadMoreBtn onLoadMore={handleLoadMore} />)} */}
 
-      {images.length > 0 && results.length - 1 > 0 &&  <LoadMoreBtn onLoadMore={handleLoadMore} />}
+      {/* {images.length > 0 && results.length - 1 > 0 &&  <LoadMoreBtn onLoadMore={handleLoadMore} />} */}
+
+      {images.length > 0 && images.length !== total &&  <LoadMoreBtn onLoadMore={handleLoadMore} />}
 
       <Toaster />
       {modalIsOpen && (

@@ -7,5 +7,6 @@ export const fetchImage = async (query, page) => {
         `https://api.unsplash.com/search/photos?query=${query}&page=${page}&per_page=${20}&client_id=${accessKey}`
       );
 
-      return response.data.results;
+      // return response.data.results;
+      return response.data;
 }
